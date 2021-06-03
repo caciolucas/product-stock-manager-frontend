@@ -1,12 +1,55 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <Menubar :model="items">
+    <template #start>
+      <router-link to="/">
+        <img
+          alt="logo"
+          src="../src/assets/logaplogo.png"
+          height="50"
+          class="p-mr-2"
+      /></router-link>
+    </template>
+  </Menubar>
+  <div id="container" class="p-center">
+    <router-view />
   </div>
-  <router-view />
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      items: [
+        {
+          label: 'Produtos',
+          icon: 'fas fa-boxes',
+          to: '/produtos',
+        },
+        {
+          label: 'Empresas',
+          icon: 'fas fa-building',
+          to: '/empresas',
+        },
+        {
+          label: 'Relatórios',
+          icon: 'fas fa-table',
+          to: '/relatorio',
+        },
+      ],
+    };
+  },
+};
+</script>
 <style>
+body {
+  background-color: var(--surface-a);
+}
+#container {
+  width: 90vw;
+  margin: auto;
+}
+.p-menubar .p-submenu-list {
+  width: 18rem !important;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
