@@ -6,18 +6,24 @@
       </h1>
     </div>
     <div class="p-grid p-jc-center p-mt-4">
-      <Card class="p-col-7 p-shadow-12" id="tarefa-1">
+      <Card
+        class="p-col-7 p-shadow-12"
+        style="display: inline-block"
+        id="tarefa-1"
+      >
         <template #title>Tarefa 1</template>
         <template #content>
           <InputText
             v-model="tarefa1String"
             placeholder="String a ser buscada"
             id="tarefa1Input"
+            @keypress.enter="tarefa1"
           />
           <Button
             v-tooltip.top="'Buscar vogal'"
             label="[GET]"
             @click="tarefa1"
+            :loading="tarefa1Loading"
           ></Button>
           <div class="json-code-block p-mt-4">
             <pre><code><span class="comment">// Resposta obtida <span v-if="tarefa1Response.status"> ({{tarefa1Response.status}} - {{tarefa1Response.statusText}})</span></span>
@@ -42,6 +48,7 @@ export default {
     return {
       tarefa1String: null,
       tarefa1Response: "",
+      tarefa1Loading: false,
     };
   },
   methods: {
@@ -58,11 +65,25 @@ export default {
           life: 3000,
         });
       } else {
+        this.tarefa1Loading = true;
         axios
           .get(`/api/tarefa-1?string=${this.tarefa1String}`)
           .then((response) => {
             this.tarefa1Response = response;
-            console.log(response);
+            this.$toast.add({
+              severity: "success",
+              summary: "Sucesso!",
+              detail: "Vogal obtida com sucesso!",
+              life: 3000,
+            });
+            this.tarefa1Loading = false;
+          })
+          .catch((error) => {
+            this.$toast.add({
+              severity: "error",
+              summary: `Erro! ${error.response.status} ${error.response.statusText}`,
+              detail: error.message,
+            });
           });
       }
     },
