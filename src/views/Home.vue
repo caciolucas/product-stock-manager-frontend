@@ -6,7 +6,7 @@
       </h1>
     </div>
     <div class="p-grid p-jc-center p-mt-4">
-      <Card class="p-col-5 p-shadow-12" id="tarefa-1">
+      <Card class="p-col-7 p-shadow-12" id="tarefa-1">
         <template #title>Tarefa 1</template>
         <template #content>
           <InputText
