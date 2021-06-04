@@ -1,29 +1,18 @@
-# product-stock-manager-frontend
+# Product Stock Manager - LogAP (Processo Seletivo)
 
-## Project setup
+Frontend for an web application built using Vue.js and PrimeVue as part of a test.
 
-```
-npm install
-```
+You can run `npm run serve` for a local dev server. Navigate to [`http://localhost:8080/product-stock-manager-frontend/`](http://localhost:8080/product-stock-manager-frontend/). The app will automatically reload if you change any of the source files.
 
-### Compiles and hot-reloads for development
+This project is also running in a GitHub Page, check it [here](https://caciolucas.github.io/product-stock-manager-frontend/)
 
-```
-npm run serve
-```
+That's the [backend repository](https://github.com/caciolucas/product-stock-manager-backend)
 
-### Compiles and minifies for production
+___
+## Technologies used
 
-```
-npm run build
-```
+### Frontend
+![Vue.js Logo in a shields.io badge](https://img.shields.io/badge/Vue.js-gray.svg?logo=vue-dot-js&style=for-the-badge&color=4FC08D&logoColor=white)
 
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Deployed
+[![Github Logo in a shields.io badge](https://img.shields.io/badge/Github%20Pages-gray.svg?logo=github&style=for-the-badge&color=181717&logoColor=white)](https://caciolucas.github.io/product-stock-manager-frontend/)
