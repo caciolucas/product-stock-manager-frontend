@@ -20,19 +20,19 @@ export default {
     return {
       items: [
         {
-          label: 'Produtos',
-          icon: 'fas fa-boxes',
-          to: '/produtos',
+          label: "Produtos",
+          icon: "fas fa-boxes",
+          to: "/produtos",
         },
         {
-          label: 'Empresas',
-          icon: 'fas fa-building',
-          to: '/empresas',
+          label: "Empresas",
+          icon: "fas fa-building",
+          to: "/empresas",
         },
         {
-          label: 'Relatórios',
-          icon: 'fas fa-table',
-          to: '/relatorio',
+          label: "Relatórios",
+          icon: "fas fa-table",
+          to: "/relatorio",
         },
       ],
     };

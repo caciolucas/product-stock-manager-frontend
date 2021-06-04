@@ -30,14 +30,8 @@
         <Column :expander="true" headerStyle="width: 3rem" />
         <Column field="id" header="#" headerStyle="width: 3rem" />
         <Column field="name" header="Nome" />
-        <Column
-          field="products.total_itens"
-          header="Total de Itens"
-        />
-        <Column
-          field="products.total_quantity"
-          header="Total de estoque"
-        />
+        <Column field="products.total_itens" header="Total de Itens" />
+        <Column field="products.total_quantity" header="Total de estoque" />
         <template #expansion="category">
           <div style="">
             <DataTable
@@ -46,15 +40,11 @@
             >
               <template #header>
                 <h4>
-                  {{ category.data.products.total_itens }} produtos da
-                  categoria {{ category.data.name }}
+                  {{ category.data.products.total_itens }} produtos da categoria
+                  {{ category.data.name }}
                 </h4>
               </template>
-              <Column
-                field="id"
-                header="#"
-                headerStyle="width: 3rem"
-              ></Column>
+              <Column field="id" header="#" headerStyle="width: 3rem"></Column>
               <Column field="name" header="Nome do produto"></Column>
               <Column field="price" header="Preço">
                 <template #body="product">
@@ -97,11 +87,7 @@
         <Column field="price" header="Preço" />
         <Column field="supplier.name" header="Fornecedor" />
         <Column field="category.name" header="Categoria" />
-        <Column
-          field="quantity"
-          header="Quantidade"
-          :exportable="false"
-        />
+        <Column field="quantity" header="Quantidade" :exportable="false" />
       </DataTable>
     </TabPanel>
     <TabPanel>
@@ -137,15 +123,11 @@
           <DataTable
             :value="
               company.data.products.itens.filter(
-                (product) => product.quantity == 0,
+                (product) => product.quantity == 0
               )
             "
           >
-            <Column
-              field="id"
-              header="#"
-              headerStyle="width: 3rem"
-            ></Column>
+            <Column field="id" header="#" headerStyle="width: 3rem"></Column>
             <Column field="name" header="Nome"></Column>
             <Column field="category.name" header="Category"></Column>
             <Column field="quantity" header="Quantidade"></Column>
@@ -162,11 +144,11 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 axios.defaults.baseURL = process.env.VUE_APP_BACKEND_BASE;
 
 export default {
-  name: 'Relatorio',
+  name: "Relatorio",
   data() {
     return {
       categories: [],
@@ -179,13 +161,13 @@ export default {
     };
   },
   mounted() {
-    axios.get('/api/category/').then((response) => {
+    axios.get("/api/category/").then((response) => {
       this.categories = response.data;
     });
-    axios.get('/api/product/?quantity=0').then((response) => {
+    axios.get("/api/product/?quantity=0").then((response) => {
       this.missingProducts = response.data;
     });
-    axios.get('/api/company/missing-stock/').then((response) => {
+    axios.get("/api/company/missing-stock/").then((response) => {
       this.suppliersMissingStock = response.data;
     });
   },

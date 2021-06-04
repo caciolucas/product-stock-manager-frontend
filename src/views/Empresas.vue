@@ -23,25 +23,15 @@
     <Column header="#" field="id" headerStyle="width: 3rem" />
     <Column field="name" header="Nome" />
     <Column field="products.total_itens" header="Tota de Itens" />
-    <Column
-      field="products.total_quantity"
-      header="Total de Estoque"
-    />
+    <Column field="products.total_quantity" header="Total de Estoque" />
     <template #expansion="company">
       <div style="">
         <h4>
-          {{ company.data.products.total_itens }} produtos fornecidos
-          por {{ company.data.name }}
+          {{ company.data.products.total_itens }} produtos fornecidos por
+          {{ company.data.name }}
         </h4>
-        <DataTable
-          :value="company.data.products.itens"
-          class="p-datatable-sm"
-        >
-          <Column
-            field="id"
-            header="#"
-            headerStyle="width: 3rem"
-          ></Column>
+        <DataTable :value="company.data.products.itens" class="p-datatable-sm">
+          <Column field="id" header="#" headerStyle="width: 3rem"></Column>
           <Column field="name" header="Nome do produto"></Column>
           <Column header="Preço" field="price">
             <template #body="product">
@@ -72,8 +62,7 @@
             maxlength="50"
             :class="{
               'p-invalid':
-                newCompanySubmitted &&
-                isNullOrWhiteSpace(newCompanyData.name),
+                newCompanySubmitted && isNullOrWhiteSpace(newCompanyData.name),
             }"
           />
           <label>Nome da empresa</label>
@@ -100,10 +89,10 @@
 </template>
 
 <script>
-import axios from 'axios';
-axios.defaults.baseURL =  process.env.VUE_APP_BACKEND_BASE;
+import axios from "axios";
+axios.defaults.baseURL = process.env.VUE_APP_BACKEND_BASE;
 export default {
-  name: 'Empresas.vue',
+  name: "Empresas.vue",
   data() {
     return {
       companies: [],
@@ -115,11 +104,9 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get('/api/company/')
-      .then((response) => {
-        this.companies = response.data;
-      });
+    axios.get("/api/company/").then((response) => {
+      this.companies = response.data;
+    });
   },
   methods: {
     // https://gist.github.com/EdCharbeneau/9552248
@@ -138,9 +125,9 @@ export default {
       this.newCompanySubmitted = true;
       if (this.isNullOrWhiteSpace(this.newCompanyData.name)) {
         this.$toast.add({
-          severity: 'warn',
-          summary: 'Atenção!',
-          detail: 'Preencha todos os campos',
+          severity: "warn",
+          summary: "Atenção!",
+          detail: "Preencha todos os campos",
           life: 3000,
         });
       } else {
@@ -148,23 +135,18 @@ export default {
       }
     },
     saveCompany() {
-      axios
-        .post(
-          '/api/company/',
-          this.newCompanyData,
-        )
-        .then((response) => {
-          this.$toast.add({
-            severity: 'success',
-            summary: 'Sucesso!',
-            detail: `Empresa "${response.data.name}" cadastrada`,
-            life: 3000,
-          });
-          this.companies.unshift(response.data);
-          this.newCompanyData = {};
-          this.newCompanyDialogVisibility = false;
-          this.newCompanySubmitted = false;
+      axios.post("/api/company/", this.newCompanyData).then((response) => {
+        this.$toast.add({
+          severity: "success",
+          summary: "Sucesso!",
+          detail: `Empresa "${response.data.name}" cadastrada`,
+          life: 3000,
         });
+        this.companies.unshift(response.data);
+        this.newCompanyData = {};
+        this.newCompanyDialogVisibility = false;
+        this.newCompanySubmitted = false;
+      });
     },
   },
 };

@@ -1,31 +1,29 @@
 <template>
   <div class="home">
-    <h1 class="p-text-uppercase">
-      Gerenciamento de estoque de produtos
-    </h1>
+    <div class="p-my-">
+      <h1 class="p-text-uppercase p-m-4">
+        Gerenciamento de estoque de produtos
+      </h1>
+    </div>
     <div class="p-grid p-jc-center p-mt-4">
       <Card class="p-col-5 p-shadow-12" id="tarefa-1">
         <template #title>Tarefa 1</template>
         <template #content>
-          <div class="p-grid">
-            <div class="p-col-8">
-              <InputText
-                v-model="tarefa1String"
-                placeholder="String a ser buscada"
-                style="width: 100%"
-              />
-            </div>
-            <div class="p-col-4">
-              <Button
-                v-tooltip.top="'Buscar vogal'"
-                label="[POST]"
-                style="width: 100%"
-                @click="tarefa1"
-              ></Button>
-            </div>
-          </div>
-          <div class="json-code-block">
-            <pre><code><span class="comment">// Resposta obtida</span><br>{{ JSONfy(tarefa1Response) }}</code></pre>
+          <InputText
+            v-model="tarefa1String"
+            placeholder="String a ser buscada"
+            id="tarefa1Input"
+          />
+          <Button
+            v-tooltip.top="'Buscar vogal'"
+            label="[GET]"
+            @click="tarefa1"
+          ></Button>
+          <div class="json-code-block p-mt-4">
+            <pre><code><span class="comment">// Resposta obtida <span v-if="tarefa1Response.status"> ({{tarefa1Response.status}} - {{tarefa1Response.statusText}})</span></span>
+<span class="comment" v-if="tarefa1Response.config">// {{tarefa1Response.config.baseURL.slice(0, -1)}}{{tarefa1Response.config.url}}</span>
+{{ tarefa1Response.data }}
+</code></pre>
           </div>
         </template>
       </Card>
@@ -35,15 +33,15 @@
 </template>
 
 <script>
-import axios from 'axios';
-axios.defaults.baseURL =  process.env.VUE_APP_BACKEND_BASE;
+import axios from "axios";
+axios.defaults.baseURL = process.env.VUE_APP_BACKEND_BASE;
 
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
     return {
       tarefa1String: null,
-      tarefa1Response: '',
+      tarefa1Response: "",
     };
   },
   methods: {
@@ -54,23 +52,19 @@ export default {
     tarefa1() {
       if (this.isNullOrWhiteSpace(this.tarefa1String)) {
         this.$toast.add({
-          severity: 'warn',
-          summary: 'Atenção!',
-          detail: 'Preencha uma string válida para busca.',
+          severity: "warn",
+          summary: "Atenção!",
+          detail: "Preencha uma string válida para busca.",
           life: 3000,
         });
       } else {
         axios
-          .get(
-            `/api/tarefa-1?string=${this.tarefa1String}`,
-          )
+          .get(`/api/tarefa-1?string=${this.tarefa1String}`)
           .then((response) => {
-            this.tarefa1Response = response.data;
+            this.tarefa1Response = response;
+            console.log(response);
           });
       }
-    },
-    JSONfy(value) {
-      return JSON.parse(JSON.stringify(value), null, 2);
     },
   },
 };
@@ -91,5 +85,8 @@ export default {
 }
 #tarefa-1:focus-within {
   transform: scale(1.2);
+}
+#tarefa1Input {
+  text-align: center;
 }
 </style>

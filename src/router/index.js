@@ -1,29 +1,29 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue';
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "../views/Home.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
   },
   {
-    path: '/produtos',
-    name: 'Produtos',
+    path: "/produtos",
+    name: "Produtos",
     component: function () {
-      return import('../views/Produtos.vue');
+      return import("../views/Produtos.vue");
     },
   },
   {
-    path: '/empresas',
-    name: 'Empresas',
+    path: "/empresas",
+    name: "Empresas",
     component: function () {
-      return import('../views/Empresas.vue');
+      return import("../views/Empresas.vue");
     },
   },
   {
-    path: '/relatorio',
-    name: 'Relatorio',
+    path: "/relatorio",
+    name: "Relatorio",
     component: function () {
       return import("../views/Relatorio.vue");
     },

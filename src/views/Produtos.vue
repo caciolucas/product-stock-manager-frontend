@@ -17,9 +17,7 @@
     </template>
     <template #right>
       <div class="p-inputgroup">
-        <span class="p-inputgroup-addon"
-          ><i class="fas fa-layer-group"
-        /></span>
+        <span class="p-inputgroup-addon"><i class="fas fa-layer-group" /></span>
         <Dropdown
           v-model="groupByOption"
           :options="groupByOptionList"
@@ -188,8 +186,7 @@
             maxlength="50"
             :class="{
               'p-invalid':
-                newProductSubmitted &&
-                isNullOrWhiteSpace(newProductData.name),
+                newProductSubmitted && isNullOrWhiteSpace(newProductData.name),
             }"
           />
           <label>Nome do produto</label>
@@ -206,8 +203,7 @@
             v-model="newProductData.price"
             :class="{
               'p-invalid':
-                newProductSubmitted &&
-                isNullOrWhiteSpace(newProductData.price),
+                newProductSubmitted && isNullOrWhiteSpace(newProductData.price),
             }"
           />
           <label>Preço</label>
@@ -284,7 +280,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 axios.defaults.baseURL = process.env.VUE_APP_BACKEND_BASE;
 
 export default {
@@ -307,8 +303,8 @@ export default {
       groupByOption: null,
       groupByOptionSelection: null,
       groupByOptionList: [
-        { value: 'supplier', label: 'Fornecedor' },
-        { value: 'category', label: 'Categoria' },
+        { value: "supplier", label: "Fornecedor" },
+        { value: "category", label: "Categoria" },
       ],
     };
   },
@@ -316,17 +312,17 @@ export default {
     console.log(process.env.VUE_APP_BACKEND_BASE);
     console.log(process.env.VUE_APP_TITLE);
     this.getProducts();
-    axios.get('/api/company/').then((response) => {
+    axios.get("/api/company/").then((response) => {
       this.suppliers = response.data;
     });
-    axios.get('/api/category/').then((response) => {
+    axios.get("/api/category/").then((response) => {
       this.categories = response.data;
     });
   },
   methods: {
     getProducts() {
       this.products = [];
-      axios.get('/api/product/').then((response) => {
+      axios.get("/api/product/").then((response) => {
         this.products = response.data;
       });
     },
@@ -358,8 +354,8 @@ export default {
     openDeleteProductDialog(product) {
       this.$confirm.require({
         message: `Deseja realmente apagar o produto ${product.name}?`,
-        header: 'Tem certeza?',
-        icon: 'pi pi-exclamation-triangle',
+        header: "Tem certeza?",
+        icon: "pi pi-exclamation-triangle",
         accept: () => {
           this.deleteProduct(product);
           this.getProducts();
@@ -374,14 +370,14 @@ export default {
         .delete(`/api/product/${product.id}/`)
         .then(() => {
           this.$toast.add({
-            severity: 'success',
-            summary: 'Sucesso!',
+            severity: "success",
+            summary: "Sucesso!",
             detail: `Produto apagado com sucesso!`,
           });
         })
         .catch((error) => {
           this.$toast.add({
-            severity: 'error',
+            severity: "error",
             summary: `Erro! ${error.response.status} ${error.response.statusText}`,
             detail: error.message,
           });
@@ -390,14 +386,11 @@ export default {
     saveProduct() {
       if (this.newProductData.id) {
         axios
-          .patch(
-            `/api/product/${this.newProductData.id}/`,
-            this.newProductData,
-          )
+          .patch(`/api/product/${this.newProductData.id}/`, this.newProductData)
           .then((response) => {
             this.$toast.add({
-              severity: 'success',
-              summary: 'Sucesso!',
+              severity: "success",
+              summary: "Sucesso!",
               detail: `Produto "${response.data.name}" atualizado`,
               life: 3000,
             });
@@ -407,20 +400,18 @@ export default {
             this.getProducts();
           });
       } else {
-        axios
-          .post('/api/product/', this.newProductData)
-          .then((response) => {
-            this.$toast.add({
-              severity: 'success',
-              summary: 'Sucesso!',
-              detail: `Produto "${response.data.name}" cadastrado`,
-              life: 3000,
-            });
-            this.newProductData = {};
-            this.newProductDialogVisibility = false;
-            this.newProductSubmitted = false;
-            this.getProducts();
+        axios.post("/api/product/", this.newProductData).then((response) => {
+          this.$toast.add({
+            severity: "success",
+            summary: "Sucesso!",
+            detail: `Produto "${response.data.name}" cadastrado`,
+            life: 3000,
           });
+          this.newProductData = {};
+          this.newProductDialogVisibility = false;
+          this.newProductSubmitted = false;
+          this.getProducts();
+        });
       }
     },
     validateNewProduct() {
@@ -433,9 +424,9 @@ export default {
         this.isNullOrWhiteSpace(this.newProductData.category_id)
       ) {
         this.$toast.add({
-          severity: 'warn',
-          summary: 'Atenção!',
-          detail: 'Preencha todos os campos',
+          severity: "warn",
+          summary: "Atenção!",
+          detail: "Preencha todos os campos",
           life: 3000,
         });
       } else {
@@ -453,28 +444,26 @@ export default {
       this.newProductData.category_id = product.category.id;
     },
     saveCategory() {
-      axios
-        .post('/api/category/', this.newCategoryData)
-        .then((response) => {
-          this.$toast.add({
-            severity: 'success',
-            summary: 'Sucesso!',
-            detail: `Categoria "${response.data.name}" cadastrada`,
-            life: 3000,
-          });
-          this.categories.unshift(response.data);
-          this.newCategoryData = {};
-          this.newCategoryDialogVisibility = false;
-          this.newCategorySubmitted = false;
+      axios.post("/api/category/", this.newCategoryData).then((response) => {
+        this.$toast.add({
+          severity: "success",
+          summary: "Sucesso!",
+          detail: `Categoria "${response.data.name}" cadastrada`,
+          life: 3000,
         });
+        this.categories.unshift(response.data);
+        this.newCategoryData = {};
+        this.newCategoryDialogVisibility = false;
+        this.newCategorySubmitted = false;
+      });
     },
     validateNewCategory() {
       this.newCategorySubmitted = true;
       if (this.isNullOrWhiteSpace(this.newCategoryData.name)) {
         this.$toast.add({
-          severity: 'warn',
-          summary: 'Atenção!',
-          detail: 'Preencha todos os campos',
+          severity: "warn",
+          summary: "Atenção!",
+          detail: "Preencha todos os campos",
           life: 3000,
         });
       } else {
