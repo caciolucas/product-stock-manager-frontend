@@ -218,7 +218,8 @@
             :class="{
               'p-invalid':
                 newProductSubmitted &&
-                isNullOrWhiteSpace(newProductData.quantity),
+                isNullOrWhiteSpace(newProductData.quantity) &&
+                newProductData.quantity != 0,
             }"
           />
           <label>Quantidade</label>
@@ -419,7 +420,8 @@ export default {
       if (
         this.isNullOrWhiteSpace(this.newProductData.name) ||
         this.isNullOrWhiteSpace(this.newProductData.price) ||
-        this.isNullOrWhiteSpace(this.newProductData.quantity) ||
+        (this.isNullOrWhiteSpace(this.newProductData.quantity) &&
+          this.newProductData.quantity != 0) ||
         this.isNullOrWhiteSpace(this.newProductData.supplier_id) ||
         this.isNullOrWhiteSpace(this.newProductData.category_id)
       ) {
