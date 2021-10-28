@@ -12,7 +12,7 @@ ___
 ## Technologies used
 
 ### Frontend
-![Vue.js Logo in a shields.io badge](https://img.shields.io/badge/Vue.js-gray.svg?logo=vue-dot-js&style=for-the-badge&color=4FC08D&logoColor=white)
+![Vue.js Logo in a shields.io badge](https://img.shields.io/badge/Vue.js-gray.svg?logo=vue.js&style=for-the-badge&color=4FC08D&logoColor=white)
 
 ### Deployed
 [![Github Logo in a shields.io badge](https://img.shields.io/badge/Github%20Pages-gray.svg?logo=github&style=for-the-badge&color=181717&logoColor=white)](https://caciolucas.github.io/product-stock-manager-frontend/)
